@@ -57,13 +57,13 @@ This is a special case of Goldbach's Conjecture restricted to numbers of the for
 ### Option 1: Run directly
 ```bash
 python prime_symmetry_test.py
+```
 
 ### Open Questions
 Can this conjecture be proven?
 Is s(p) < C√p for some constant C?
 Why do 68% of s(p) values divide by 3?
 Does a similar result hold for 2nᵏ where k > 2?
-
 
 ---
 *Research by **Ugur Kandemis** (Vibe-X Protocol)*

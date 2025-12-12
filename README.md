@@ -65,11 +65,5 @@ Why do 68% of s(p) values divide by 3?
 Does a similar result hold for 2nᵏ where k > 2?
 
 
-To change the number of primes tested, edit this line in the code:
-
-python
-n_values, failed = test_conjecture(1000)  # Change 1000 to any number
-
-
 ---
 *Research by **Ugur Kandemis** (Vibe-X Protocol)*

@@ -70,5 +70,6 @@ To change the number of primes tested, edit this line in the code:
 python
 n_values, failed = test_conjecture(1000)  # Change 1000 to any number
 
-## Author
-[Uğur Kandemiş] - December 2025
+
+---
+*Research by **Ugur Kandemis** (Vibe-X Protocol)*

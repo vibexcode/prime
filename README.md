@@ -1,12 +1,10 @@
-# Square-Symmetric Primes Conjecture
-
-## Heuristic Motivation
+## Heuristic Motivation and Square-Centered Symmetry
 
 ### Why the form p + q = 2n²?
 
-This conjecture is not based on an arbitrary numerical pattern, but on heuristic considerations arising from the interaction between prime distribution and quadratic growth.
+This conjecture is not proposed as an arbitrary numerical pattern, but is motivated by heuristic considerations arising from the interaction between prime distribution and quadratic growth.
 
-The quantity **2n²** defines a symmetric quadratic curve centered on even integers with regular modular behavior. Unlike linear centers (as in classical Goldbach-type problems), quadratic centers grow sufficiently fast to provide an expanding search space for admissible prime pairs, while remaining sparse enough to avoid trivial saturation. This balance makes **2n²** a natural candidate for studying prime symmetry.
+The quantity **2n²** defines a symmetric quadratic center on the number line. Unlike linear centers (as in classical Goldbach-type problems), quadratic centers grow fast enough to provide an expanding search space for admissible prime pairs, while remaining sparse enough to avoid trivial saturation. This balance makes **2n²** a natural candidate for studying structured prime symmetry.
 
 From a probabilistic number-theoretic perspective, the **Bateman–Horn heuristic** suggests that polynomial expressions of the form
 
@@ -18,20 +16,27 @@ should attain prime values with asymptotic density proportional to
 
 provided that no local congruence obstructions systematically eliminate candidates. For odd primes p, the expression 2n² − p avoids trivial modular exclusions, making the existence of admissible n values heuristically plausible.
 
-The conjecture can thus be interpreted as a *quadratic prime-pair symmetry*: for a fixed odd prime p, the sequence of values 2n² − p sweeps through odd integers with increasing density, while primality acts as a sparse but non-negligible filter. Empirically, the observed fact that relatively small values of n suffice suggests that the expected waiting time for a prime hit grows slowly compared to the quadratic scale.
+Empirically, the fact that relatively small values of n suffice across large datasets suggests that the expected waiting time for a prime hit grows slowly compared to the quadratic scale.
 
-Finally, the form 2n² exhibits notable modular regularities. In particular, when n ≡ 0 (mod 3), one has
+---
 
-    2n² ≡ 0 (mod 18),
+### Square-Centered Symmetry (Equivalent Formulation)
 
-which aligns with the observed clustering of minimal solutions around multiples of 3. This suggests that the phenomenon may reflect structural compatibility between modular constraints on primes, rather than random coincidence.
+The relation
 
-These considerations do not constitute a proof, but they provide a heuristic framework explaining why the conjecture is plausible and why counterexamples may be rare or nonexistent within large computational ranges.
+    p + q = 2n²
 
+can be equivalently rewritten as
 
-## **For every odd prime p ≥ 3, there exists at least one positive integer n such that (2n² - p) is also prime.**
+    p − n² = n² − q.
 
-In other words, primes p and q = 2n² - p are symmetric around the square n².
+This shows that the prime pair (p, q) is **symmetric around the perfect square n²**. Under this interpretation, the conjecture can be stated geometrically:
+
+> For every odd prime p, there exists a perfect square n² such that p has a prime mirror q at the same distance on the opposite side of n².
+
+This square-centered formulation is mathematically equivalent to the original conjecture. It does not constitute an independent proof, but provides a geometric perspective that motivates the interpretation of perfect squares as symmetry centers in the distribution of primes.
+
+---
 
 ## Numerical Evidence
 
@@ -81,13 +86,15 @@ However, in the observed data, approximately **68.1%** of the minimal n values f
 
 This observation motivates further theoretical investigation into modular constraints induced by the quadratic form 2n².
 
-## Relation to Goldbach
+### Relation to Goldbach 
 
-This conjecture is equivalent to asking:
+Under this conjecture, every even number of the form
 
-> "Can every number of the form 2n² be written as the sum of two odd primes?"
+    2n²
 
-This is a special case of Goldbach's Conjecture restricted to numbers of the form 2n².
+would be expressible as the sum of two odd primes. This constitutes a **restricted instance** of the classical Goldbach Conjecture, included here solely for contextual comparison.
+
+No claim is made regarding the general validity of Goldbach’s Conjecture.
 
 ## Usage
 ### Option 1: Run directly

@@ -1,14 +1,16 @@
 """
-Kare-Simetrik Asallar Konjektürü
-================================
-Her tek asal p >= 3 için, en az bir n vardır ki (2n² - p) de asaldır.
+Square-Symmetric Primes Conjecture
+==================================
+For every odd prime p >= 3, there exists at least one positive integer n
+such that (2n² - p) is also prime.
 
-Yazar: [Senin adın]
-Tarih: Haziran 2025
+Author: vibexcode
+Date: June 2025
+Repository: https://github.com/vibexcode/prime
 """
 
 def is_prime(n):
-    """Sayının asal olup olmadığını kontrol eder"""
+    """Check if a number is prime"""
     if n < 2:
         return False
     if n == 2:
@@ -21,7 +23,7 @@ def is_prime(n):
     return True
 
 def find_symmetric_prime(p, max_n=500000):
-    """p asalı için 2n² - p'nin asal olduğu en küçük n'yi bulur"""
+    """Find the smallest n where 2n² - p is also prime"""
     for n in range(2, max_n):
         q = 2 * n * n - p
         if q > 1 and is_prime(q):
@@ -29,10 +31,10 @@ def find_symmetric_prime(p, max_n=500000):
     return None, None
 
 def test_conjecture(num_primes=1000):
-    """Konjektürü belirtilen sayıda asal için test eder"""
-    print(f"İlk {num_primes} tek asal için test başlıyor...")
+    """Test the conjecture for a given number of primes"""
+    print(f"Testing first {num_primes} odd primes...")
     
-    # Asalları oluştur
+    # Generate primes
     primes = []
     num = 3
     while len(primes) < num_primes:
@@ -40,7 +42,7 @@ def test_conjecture(num_primes=1000):
             primes.append(num)
         num += 2
     
-    print(f"Aralık: {primes[0]} - {primes[-1]}")
+    print(f"Range: {primes[0]} - {primes[-1]}")
     print("-" * 50)
     
     failed = []
@@ -49,8 +51,8 @@ def test_conjecture(num_primes=1000):
     n_values = []
     
     for i, p in enumerate(primes):
-        if i % (num_primes // 10) == 0:
-            print(f"İlerleme: {i}/{num_primes}")
+        if num_primes >= 10 and i % (num_primes // 10) == 0:
+            print(f"Progress: {i}/{num_primes}")
         
         n, q = find_symmetric_prime(p)
         if n is None:
@@ -61,25 +63,27 @@ def test_conjecture(num_primes=1000):
                 max_n_found = n
                 max_n_prime = p
     
-    # Sonuçlar
+    # Results
     print("-" * 50)
-    print(f"Test edilen asal sayısı: {len(primes)}")
-    print(f"Başarısız: {len(failed)}")
-    print(f"En büyük n: {max_n_found} (p = {max_n_prime} için)")
+    print(f"Primes tested: {len(primes)}")
+    print(f"Failed: {len(failed)}")
+    print(f"Maximum n: {max_n_found} (for p = {max_n_prime})")
     
     if not failed:
-        print("✓ Tüm asallar için en az bir n bulundu!")
+        print("✓ Found at least one n for all primes!")
+    else:
+        print(f"Failed primes: {failed[:10]}...")
     
     return n_values, failed
 
 def analyze_divisibility(n_values):
-    """n değerlerinin 3'e bölünebilirlik analizini yapar"""
+    """Analyze divisibility of n values by 3"""
     div_by_3 = sum(1 for n in n_values if n % 3 == 0)
     total = len(n_values)
     
-    print(f"\n3'e Bölünebilirlik Analizi:")
-    print(f"3'e bölünen: {div_by_3} (%{100*div_by_3/total:.1f})")
-    print(f"3'e bölünmeyen: {total - div_by_3} (%{100*(total-div_by_3)/total:.1f})")
+    print(f"\nDivisibility by 3 Analysis:")
+    print(f"Divisible by 3: {div_by_3} ({100*div_by_3/total:.1f}%)")
+    print(f"Not divisible by 3: {total - div_by_3} ({100*(total-div_by_3)/total:.1f}%)")
 
 if __name__ == "__main__":
     n_values, failed = test_conjecture(1000)

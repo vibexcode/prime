@@ -96,6 +96,11 @@ would be expressible as the sum of two odd primes. This constitutes a **restrict
 
 No claim is made regarding the general validity of Goldbach’s Conjecture.
 
+### Exploratory Analysis
+
+Exploratory visualizations and regression analyses related to square-centered symmetric prime pairs are provided in the `analysis/` directory for transparency and reproducibility.
+
+
 ## Usage
 ### Option 1: Run directly
 ```bash

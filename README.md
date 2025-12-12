@@ -58,7 +58,7 @@ This is a special case of Goldbach's Conjecture restricted to numbers of the for
 ```bash
 python prime_symmetry_test.py
 
-## Open Questions
+### Open Questions
 Can this conjecture be proven?
 Is s(p) < C√p for some constant C?
 Why do 68% of s(p) values divide by 3?
@@ -70,5 +70,5 @@ To change the number of primes tested, edit this line in the code:
 python
 n_values, failed = test_conjecture(1000)  # Change 1000 to any number
 
-Author
+## Author
 [Uğur Kandemiş] - December 2025

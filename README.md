@@ -67,10 +67,10 @@ from prime_symmetry_test import test_conjecture, analyze_divisibility
 n_values, failed = test_conjecture(10000)  # Test first 10,000 primes
 analyze_divisibility(n_values)
 ```
-
+---
 ## Open Questions
   Can this conjecture be proven?
-  Is s(p) < C√p for some constant C?
+  Is s(p) < C√p for some constant C? 
   Why do 68% of s(p) values divide by 3?
   Does a similar result hold for 2nᵏ where k > 2?
 

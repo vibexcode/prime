@@ -59,11 +59,20 @@ This is a special case of Goldbach's Conjecture restricted to numbers of the for
 python prime_symmetry_test.py
 ```
 
-### Open Questions
-Can this conjecture be proven?
-Is s(p) < C√p for some constant C?
-Why do 68% of s(p) values divide by 3?
-Does a similar result hold for 2nᵏ where k > 2?
+To test with different number of primes:
+```bash
+python
+from prime_symmetry_test import test_conjecture, analyze_divisibility
+
+n_values, failed = test_conjecture(10000)  # Test first 10,000 primes
+analyze_divisibility(n_values)
+```
+
+## Open Questions
+  Can this conjecture be proven?
+  Is s(p) < C√p for some constant C?
+  Why do 68% of s(p) values divide by 3?
+  Does a similar result hold for 2nᵏ where k > 2?
 
 ---
-*Research by **Ugur Kandemis** (Vibe-X Protocol)*
+*Research by **Uğur Kandemiş** (Vibe-X Protocol)*

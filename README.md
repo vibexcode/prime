@@ -100,6 +100,17 @@ No claim is made regarding the general validity of Goldbach’s Conjecture.
 
 Exploratory visualizations and regression analyses related to square-centered symmetric prime pairs are provided in the `analysis/` directory for transparency and reproducibility.
 
+## Exploratory Analysis Code
+
+This directory contains exploratory scripts used to visualize and analyze
+square-centered symmetric prime pairs.
+
+The scripts are provided for transparency and reproducibility.  
+They do not implement or propose a predictive or generative model.
+
+The regression analyses are descriptive only and are intended to illustrate
+central tendencies under specific selection criteria.
+
 
 ## Usage
 ### Option 1: Run directly

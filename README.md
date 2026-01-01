@@ -20,118 +20,122 @@ Empirically, the fact that relatively small values of n suffice across large dat
 
 ---
 
-### Square-Centered Symmetry (Equivalent Formulation)
+### # Square-Symmetric Primes Conjecture
 
-The relation
+This repository investigates the following conjecture:
 
-    p + q = 2n²
+> **Conjecture.**  
+> For every odd prime \( p \ge 3 \), there exists an integer \( n \ge 2 \) such that  
+> \[
+> q = 2n^2 - p
+> \]
+> is also prime.
 
-can be equivalently rewritten as
-
-    p − n² = n² − q.
-
-This shows that the prime pair (p, q) is **symmetric around the perfect square n²**. Under this interpretation, the conjecture can be stated geometrically:
-
-> For every odd prime p, there exists a perfect square n² such that p has a prime mirror q at the same distance on the opposite side of n².
-
-This square-centered formulation is mathematically equivalent to the original conjecture. It does not constitute an independent proof, but provides a geometric perspective that motivates the interpretation of perfect squares as symmetry centers in the distribution of primes.
+Equivalently:
+\[
+p + q = 2n^2
+\]
+so the primes \(p\) and \(q\) are symmetric around the square center \(n^2\).
 
 ---
 
-## Numerical Evidence
+## Interpretation (Geometric Intuition)
 
-| Primes Tested | Maximum p   | Counterexamples | Max n |
-|---------------|-------------|-----------------|-------|
-| 1,000         | 7,919       | 0               |  90   |
-| 10,000        | 104,743     | 0               |  279  |
-| 100,000       | 1,299,721   | 0               |  915  |
-| 1,000,000     | 15,485,863  | 0               | 2,925 |
+- The square \(n^2\) acts as a **symmetry center**.
+- Prime pairs \((p,q)\) appear as equal-distance deviations:
+  \[
+  p = n^2 - d,\quad q = n^2 + d
+  \]
+- The center \(n^2\) itself cannot be prime (for \(n>1\)), so primality is realized only through symmetric offsets.
 
-## Key Findings
+This makes \(n^2\) a **binding but non-collapsing constraint**:  
+it enforces balance without destroying primality.
 
-### 1. Growth of Symmetry Index
+---
 
-The smallest n for each prime p is called the **symmetry index s(p)**.
+## What the Code Does
 
-Observed relationship:
+The main script:
 
-| Max p      | √(Max p) | Max s(p) | Ratio s(p)/√p |
-|------------|----------|----------|---------------|
-| 7,919      | 89       | 90       | 1.01          |
-| 104,743    | 324      | 279      | 0.86          |
-| 1,299,721  | 1,140    | 915      | 0.80          |
-| 15,485,863 | 3,935    | 2,925    | 0.74          |
+1. Generates the first \(N\) odd primes.
+2. For each prime \(p\), searches for an integer \(n\) such that  
+   \(q = 2n^2 - p\) is prime.
+3. By default, computes the **true minimal symmetry index**
+   \[
+   s(p) = \min\{n \ge 2 : 2n^2 - p \text{ is prime}\}.
+   \]
 
-**Conclusion:** s(p) appears to grow as O(√p)
+An optional **heuristic mode** is provided for faster scanning, but it does **not**
+guarantee minimality and is clearly labeled as such.
 
-### 2. Divisibility Pattern
+---
 
-Among the first 1,000 primes:
+## Minimal vs Fast Search Modes
 
-| Condition            | Count | Percentage |
-|----------------------|-------|------------|
-| n divisible by 3     | 681   | **68.1%**  |
-| n not divisible by 3 | 319   | 31.9%      |
-  
-Expected by random chance: 33.3%
+- **minimal (default)**  
+  Scans \(n = 2,3,4,\dots\) in increasing order.  
+  Guarantees that the returned \(n\) is the smallest possible.
 
-This suggests the formula 2n² - p favors producing primes when n ≡ 0 (mod 3).
+- **fast (heuristic)**  
+  Prioritizes \(n \equiv 0 \pmod{3}\) to speed up searches.  
+  Useful for large experiments, but **not guaranteed to return the minimal \(n\)**.
 
-### Note on Statistical Significance
+The conjecture itself concerns **existence**, not minimality;  
+minimality is used here as a canonical, reproducible choice.
 
-If the minimal values of n were uniformly distributed modulo 3, one would expect approximately **33.3%** of them to satisfy  
-n ≡ 0 (mod 3).
+---
 
-However, in the observed data, approximately **68.1%** of the minimal n values fall into this class, representing a deviation of more than **2×** the expected frequency. While no formal hypothesis test is performed here, the magnitude of this deviation strongly suggests a structural bias rather than random fluctuation.
+## Modular (Local Obstruction) Analysis
 
-This observation motivates further theoretical investigation into modular constraints induced by the quadratic form 2n².
+We also test whether the polynomial
+\[
+q(n,p) = 2n^2 - p
+\]
+is **locally obstructed** modulo small integers.
 
-### Relation to Goldbach 
+A complete scan for all moduli \( m \le 31 \) shows:
 
-Under this conjecture, every even number of the form
+- No nontrivial local obstructions.
+- The only obstruction occurs for \(p \equiv 0 \pmod{2}\), which is outside the
+  scope of the conjecture (odd primes only).
 
-    2n²
+Thus, the conjecture is **locally consistent**: it does not collapse modulo
+small integers.
 
-would be expressible as the sum of two odd primes. This constitutes a **restricted instance** of the classical Goldbach Conjecture, included here solely for contextual comparison.
+---
 
-No claim is made regarding the general validity of Goldbach’s Conjecture.
+## Mod 3 Phenomenon
 
-### Exploratory Analysis
+Empirically, many minimal symmetry indices satisfy \( n \equiv 0 \pmod{3} \).
 
-Exploratory visualizations and regression analyses related to square-centered symmetric prime pairs are provided in the `analysis/` directory for transparency and reproducibility.
+This is **not** a local obstruction.
+Instead, it reflects a **modular narrowing**:
+certain residue classes of \(n\) avoid forced divisibility by 3 in
+\(q = 2n^2 - p\).
 
-## Exploratory Analysis Code
+In other words:
+- mod 3 creates a *preferred escape route*,
+- not a barrier.
 
-This directory contains exploratory scripts used to visualize and analyze
-square-centered symmetric prime pairs.
+---
 
-The scripts are provided for transparency and reproducibility.  
-They do not implement or propose a predictive or generative model.
+## Status
 
-The regression analyses are descriptive only and are intended to illustrate
-central tendencies under specific selection criteria.
+- No counterexample found for the tested ranges.
+- No small-modulus local obstruction detected.
+- The conjecture remains open.
 
+This repository provides experimental evidence and geometric intuition,
+not a proof.
+
+---
 
 ## Usage
-### Option 1: Run directly
-```bash
-python prime_symmetry_test.py
-```
 
-To test with different number of primes:
-```bash
-python
-from prime_symmetry_test import test_conjecture, analyze_divisibility
+Run the main script to test the conjecture on the first \(N\) odd primes
+and analyze symmetry indices.
 
-n_values, failed = test_conjecture(10000)  # Test first 10,000 primes
-analyze_divisibility(n_values)
-```
----
-## Open Questions
-  Can this conjecture be proven?
-  Is s(p) < C√p for some constant C? 
-  Why do 68% of s(p) values divide by 3?
-  Does a similar result hold for 2nᵏ where k > 2?
+
 
 ---
 *Research by **Uğur Kandemiş** (Vibe-X Protocol)*
